@@ -1,25 +1,20 @@
 import { StormGlass } from '@src/clients/stormGlass';
-import axios from "axios";
-import stormGlassWeather3HoursFixture from '@test/fixtures/stormglass_weather_3_hours';
-import stormGlassNomalized3HoursFixture from "@test/fixtures/stormglass_normalized_response_3_hours";
+import stormglassNormalizedResponseFixture from '@test/fixtures/stormglass_normalized_response_3_hours.json';
+import * as stormglassWeatherPointFixture from '@test/fixtures/stormglass_weather_3_hours.json';
+import axios from 'axios';
 
 jest.mock('axios');
 
 describe('StormGlass client', () => {
-  it('should return the normalized forecast from the StormGlass service', async() => {
+  const mockedAxios = axios as jest.Mocked<typeof axios>;
+  it('should return the normalized forecast from the StormGlass service', async () => {
     const lat = -33.792726;
     const lng = 151.289824;
 
+    mockedAxios.get.mockResolvedValue({ data: stormglassWeatherPointFixture });
 
-    axios.get = jest.fn().mockResolvedValue(stormGlassWeather3HoursFixture)
-    // mockedRequest.get.mockResolvedValue({
-    //   data: stormglassWeatherPointFixture,
-    // } as HTTPUtil.Response);
-
-    // MockedCacheUtil.get.mockReturnValue(undefined);
-
-    const stormGlass = new StormGlass(axios);
+    const stormGlass = new StormGlass(mockedAxios);
     const response = await stormGlass.fetchPoints(lat, lng);
-    expect(response).toEqual(stormGlassNomalized3HoursFixture);
-  })
+    expect(response).toEqual(stormglassNormalizedResponseFixture);
+  });
 });
