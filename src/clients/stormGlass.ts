@@ -48,6 +48,7 @@ export class StormGlass {
     );
     return this.normalizeResponse(response.data);
   }
+  
   private normalizeResponse(
     points: StormGlassForecastResponse
   ): ForecastPoint[] {
