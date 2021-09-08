@@ -46,7 +46,7 @@
     "lodash": "^4.17.19",
     "module-alias": "^2.2.2",
     "moment": "^2.27.0",
-    "mongoose": "^5.9.18",
+    "mongoose": "^6.0.5",
     "node-cache": "^5.1.2",
     "pino": "^6.3.2",
     "swagger-ui-express": "^4.1.4"
@@ -62,6 +62,7 @@
     "@types/jsonwebtoken": "^8.5.0",
     "@types/lodash": "^4.14.155",
     "@types/module-alias": "^2.0.0",
+    "@types/mongoose": "^5.11.97",
     "@types/multer": "^1.4.3",
     "@types/node": "14",
     "@types/pino": "^6.3.0",
