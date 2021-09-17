@@ -1,3 +1,4 @@
+import AuthService from '@src/services/auth';
 import mongoose, { Document, Model } from 'mongoose';
 
 export interface User {
@@ -34,6 +35,7 @@ const schema = new mongoose.Schema(
   }
 );
 
+
 schema.path('email').validate(
   async (email: string) => {
     const emailCount = await mongoose.models.User.countDocuments({ email });
@@ -42,6 +44,20 @@ schema.path('email').validate(
   'already exists in the database.',
   CUSTOM_VALIDATION.DUPLICATED
 );
+
+
+schema.pre<UserModel>('save', async function (): Promise<void> {
+  if(!this.password || !this.isModified('password')) {
+    return;
+  }
+
+  try {
+    const hashedPassword = await AuthService.hashPassword(this.password);
+    this.password = hashedPassword
+  } catch(err) {
+    console.log(`Èrror hasing the password for the user ${this.name}`)
+  }
+})
 
 
 export const User: Model<UserModel> = mongoose.model('User', schema);
