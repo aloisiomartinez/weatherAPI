@@ -15,7 +15,6 @@
     "style:check": "prettier --check 'src/**/*.ts' 'test/**/*.ts'",
     "style:fix": "prettier --write 'src/**/*.ts' 'test/**/*.ts'"
   },
-  "engines": {"node": "12"},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/aloisiomartinez/weatherAPI.git"
