@@ -9,6 +9,7 @@ import { ForecastController } from './controllers/forecast';
 import { BeachesController } from './controllers/beaches';
 import { UsersController } from './controllers/users';
 import logger from './logger';
+import apiSchema from './api-schema.json';
 
 export class SetupServer extends Server {
   constructor(private port = 3000) {
